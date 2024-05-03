@@ -6,7 +6,7 @@
 
 body {
     width: 100%;
-    background-image: url("img/fondo.jpg");
+    background-image: url("fondo.jpg");
     display: flex;
 }
 /* Estilo para el contenedor de mensajes de validación */
