@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    background-image: url("img/fondo.jpg");
+    display: flex;
+}
+/* Estilo para el contenedor de mensajes de validación */
+.pilas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Estilo para los mensajes de validación */
+#mensaje2,
+#mensaje {
+    display: none; /* Por defecto, ocultar los mensajes */
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da; /* Color de fondo rojo para mensaje de error */
+    color: #721c24; /* Color de texto rojo oscuro */
+}
+
+/* Estilo para el mensaje de éxito */
+#mensaje {
+    background-color: #d4edda; /* Color de fondo verde para mensaje de éxito */
+    color: #155724; /* Color de texto verde oscuro */
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(247, 239, 239);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgb(255, 255, 255);
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+.container header {
+    font-size: 1.5rem;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.container .form {
+    margin-top: 30px;
+}
+
+.form .input-box {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.input-box label {
+    color: rgba(0, 0, 0, 0.818);
+}
+
+.form .input-box input {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: rgba(131, 130, 130, 0.861);
+    margin-top: 8px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 7px;
+    padding: 0 15px;
+}
+
+button {
+    margin-top: 10px;
+    height: 40px;
+    width: 50%;
+    margin-left: 30px;
+    background-color: aqua;
+    border-radius: 30px;
+    border-color: transparent;
+    margin: 0 auto;
+    gap: 23px;
+}
+
+/* Estilo para las tarjetas (cards) */
+.card {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(247, 239, 239);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgb(255, 255, 255);
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card p {
+    margin-bottom: 8px;
+    color: #666;
+}
+/* Estilo para el contenedor de las tarjetas */
+.tarjetas-grid {
+    margin-top: 20%;
+    margin-left: 4%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Cuatro columnas de tamaño igual */
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+/* Estilo para los botones de las tarjetas */
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.botones button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(141, 255, 255);
+    color: #000000;
+    cursor: pointer;
+}
+
+.botones button:hover {
+    background-color: rgba(115, 116, 116, 0.692);
+}
+
+

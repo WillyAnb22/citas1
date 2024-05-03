@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinaria</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- <div class="fondo"><img src="./img/fondo.jpg"></div> -->
+    <div class="pilas">
+        <div id="mensaje2"></div>
+        <div id="mensaje"></div>
+    </div>
+    <div class="container">
+        <header>DATOS CITA</header>
+        <div action="#" class="form">
+            <div class="input-box">
+                <label>Nombre</label>
+                <input id="nom" type="text" placeholder="Escriba Mascota" required />
+            </div>
+
+            <div class="input-box">
+                <label>Propietario</label>
+                <input id="propi" type="text" placeholder="Nombre Propietario" required />
+            </div>
+            <div class="input-box">
+                <label>Teléfono</label>
+                <input id="tel" type="text" placeholder="Escriba tu teléfono" required />
+            </div>
+            <div class="input-box">
+                <label for="start">Fecha de Cita</label>
+                <div class="fecha">
+                    <input type="date" id="date" />
+                </div>
+            </div>
+            <div class="input-box">
+                <label for="time">Hora de Cita</label>
+                <div class="hora">
+                    <input type="time" id="hora" />
+                </div>
+            </div>
+            <div class="input-box">
+                <label>Tipo de Mascota</label>
+                <select name="lang" id="tm">
+                    <option value="cedula">Perro</option>
+                    <option value="tarjeta">Gato</option>
+                    <option value="extran">Pez</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label>Sintomas</label>
+                <input id="sintom" type="text" placeholder="Escriba los sintomas que presenta" required />
+            </div>
+
+            <div class="enviar">
+                <!-- <button onclick="enviar(),pintar()">Agenda tu cita</button> -->
+                <button onclick="validar()">Agenda tu cita</button>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="cont">
+        <!-- Tu formulario aquí -->
+
+        <!-- Contenedor de las tarjetas -->
+        <div id="tarjetas-container" class="tarjetas-grid"></div>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script>
+        // Función para enviar y crear una nueva tarjeta
+        function enviar() {
+            // Obtener los valores de los campos del formulario
+            var nombre = document.getElementById('nom').value;
+            var propietario = document.getElementById('propi').value;
+            var telefono = document.getElementById('tel').value;
+            var fechaCita = document.getElementById('date').value;
+            var horaCita = document.getElementById('hora').value;
+            var tipoMascota = document.getElementById('tm').value;
+            var sintomas = document.getElementById('sintom').value;
+
+            // Crear la estructura de la tarjeta con los datos del formulario
+            var card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <h2>Nombre: ${nombre}</h2>
+                <p>Propietario: ${propietario}</p>
+                <p>Teléfono: ${telefono}</p>
+                <p>Fecha de Cita: ${fechaCita}</p>
+                <p>Hora de Cita: ${horaCita}</p>
+                <p>Tipo de Mascota: ${tipoMascota}</p>
+                <p>Síntomas: ${sintomas}</p>
+                <div class="botones">
+                    <button onclick="editarTarjeta(this.parentElement.parentElement)">Editar</button>
+                    <button onclick="eliminarTarjeta(this.parentElement.parentElement)">Eliminar</button>
+                </div>
+            `;
+
+            // Agregar la tarjeta al contenedor de tarjetas
+            document.getElementById('tarjetas-container').appendChild(card);
+        }
+
+        // Función para editar una tarjeta
+        function editarTarjeta(tarjeta) {
+            // Obtener los datos de la tarjeta para prellenar el formulario de edición
+            var nombre = tarjeta.querySelector('h2').textContent.split(':')[1].trim();
+            var propietario = tarjeta.querySelector('p:nth-of-type(1)').textContent.split(':')[1].trim();
+            var telefono = tarjeta.querySelector('p:nth-of-type(2)').textContent.split(':')[1].trim();
+            var fechaCita = tarjeta.querySelector('p:nth-of-type(3)').textContent.split(':')[1].trim();
+            var horaCita = tarjeta.querySelector('p:nth-of-type(4)').textContent.split(':')[1].trim();
+            var tipoMascota = tarjeta.querySelector('p:nth-of-type(5)').textContent.split(':')[1].trim();
+            var sintomas = tarjeta.querySelector('p:nth-of-type(6)').textContent.split(':')[1].trim();
+
+            // Llenar el formulario con los datos de la tarjeta a editar
+            document.getElementById('nom').value = nombre;
+            document.getElementById('propi').value = propietario;
+            document.getElementById('tel').value = telefono;
+            document.getElementById('date').value = fechaCita;
+            document.getElementById('hora').value = horaCita;
+            document.getElementById('tm').value = tipoMascota;
+            document.getElementById('sintom').value = sintomas;
+
+            // Eliminar la tarjeta del DOM
+            tarjeta.remove();
+        }
+
+        // Función para eliminar una tarjeta
+        function eliminarTarjeta(tarjeta) {
+            // Eliminar la tarjeta del DOM
+            tarjeta.remove();
+        }
+
+        // Función para limpiar los campos del formulario
+        function limpiar() {
+            document.getElementById('nom').value = '';
+            document.getElementById('propi').value = '';
+            document.getElementById('tel').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('hora').value = '';
+            document.getElementById('tm').value = '';
+            document.getElementById('sintom').value = '';
+        }
+
+        // Función para validar el formulario antes de enviar
+        function validar() {
+            if (!document.getElementById("tm").value) {
+                document.getElementById("mensaje2").textContent = "Por favor digite el tipo de mascota";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else if (!document.getElementById("nom").value) {
+                document.getElementById("mensaje2").textContent = "Por favor digite el nombre de la mascota";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else if (!document.getElementById("propi").value) {
+                document.getElementById("mensaje2").textContent = "Por favor digite su nombre";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else if (document.getElementById("tel").value.length < 10) {
+                document.getElementById("mensaje2").textContent = "El número debe ser mayor a 9 caracteres";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else if (!document.getElementById("date").value) {
+                document.getElementById("mensaje2").textContent = "Por favor digite la fecha";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else if (!document.getElementById("hora").value) {
+                document.getElementById("mensaje2").textContent = "Por favor digite la hora";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else if (!document.getElementById("sintom").value) {
+                document.getElementById("mensaje2").textContent = "Por favor digite los síntomas";
+                document.getElementById("mensaje2").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje2").style.display = "none";
+                }, 3000);
+            } else {
+                enviar();
+                document.getElementById("mensaje").textContent = "REGISTRO EXITOSO";
+                document.getElementById("mensaje").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mensaje").style.display = "none";
+                }, 4000);
+            }
+        }
+    </script>
+</body>
+
+</html>
